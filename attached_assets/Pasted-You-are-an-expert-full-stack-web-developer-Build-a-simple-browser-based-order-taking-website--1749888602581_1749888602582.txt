@@ -1,0 +1,67 @@
+You are an expert full-stack web developer.
+
+Build a **simple browser-based order-taking website** for a local business that sells commodities like potatoes, onions, rice, and atta.
+
+🌐 This is a **local mini-ERP system** made entirely with:
+- HTML, CSS, and JavaScript
+- No backend server
+- Use localStorage for all data storage
+- No frameworks like React or Angular — keep it vanilla
+
+📱 1. Customer Interface
+
+🔓 a. Registration Page (first time only):
+- Collect: Full Name, Phone Number, Shop Name (optional), Delivery Location
+- Store in `localStorage`
+- After registration, redirect to order page
+- Don’t show this form again unless storage is cleared
+
+🛒 b. Order Page (after registration):
+- Display today's date (e.g., "Rates for 14 June 2025")
+- Show product list organized into categories:
+  - Example Categories: Potatoes, Onions, Rice, Flour/Atta
+- Each product should show:
+  - Product name
+  - Rate (per package, e.g. per 50kg bag)
+  - Input box to select number of packages
+  - Auto-calculate total per item and grand total at bottom
+
+🧾 Buttons:
+- ✅ “Place Order” (save order in localStorage, shows confirmation)
+- 📞 “Call Us” (uses `tel:+91XXXXXXXXXX`)
+- 🔴 If store is OFF, disable form and show “Store is currently closed” notice
+
+🔐 2. Admin Dashboard (`/admin` URL):
+- Password protected (hardcoded password is okay)
+- Only accessible via `www.example.com/admin` or `localhost/admin.html`
+
+📋 Admin Features:
+- ✅ View all registered customer details
+- ✅ See customer orders
+- ✅ Toggle Store ON/OFF
+- ✅ Update product prices live
+- ✅ Add new products within existing categories
+- ✅ Add **new product categories** (e.g., Lentils, Sugar, etc.)
+  - New categories should appear in customer view
+- ✅ Export orders (CSV or JSON — optional bonus)
+- ✅ All changes saved in localStorage and reflected instantly
+
+📦 Product Data Model (stored in localStorage):
+```js
+{
+  categories: [
+    {
+      name: "Potatoes",
+      items: [
+        { name: "Gulla", price: 520 },
+        { name: "Pokhraj", price: 600 }
+      ]
+    },
+    {
+      name: "Rice",
+      items: [
+        { name: "Swastik Miniket", price: 1599 }
+      ]
+    }
+  ]
+}
