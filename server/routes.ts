@@ -9,8 +9,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.json({ status: "ok", timestamp: new Date().toISOString() });
   });
 
-  // Initialize default data
-  await (storage as any).initializeDefaultData();
+  // Initialize default data (with error handling)
+  try {
+    await (storage as any).initializeDefaultData();
+  } catch (error) {
+    console.error('Failed to initialize database data:', error);
+    // Don't fail the server startup, just log the error
+  }
   
   // Customer endpoints
   app.get("/api/customer/current", async (req, res) => {
