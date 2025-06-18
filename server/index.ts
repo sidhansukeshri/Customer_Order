@@ -68,13 +68,16 @@ app.use((req, res, next) => {
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
-    serveStatic(app);
+    // In production, this is just an API server
+    // No need to serve static files
+    app.get("/", (req, res) => {
+      res.json({ message: "Restaurant Order System API", status: "running" });
+    });
   }
 
-  // ALWAYS serve the app on port 5000
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = 5000;
+  // ALWAYS serve the app on the port provided by Railway
+  // Railway provides PORT environment variable
+  const port = process.env.PORT || 5000;
   server.listen({
     port,
     host: "0.0.0.0",
